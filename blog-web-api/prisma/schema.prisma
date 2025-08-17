@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id         String    @id @default(uuid())             // Unique user identifier
+  first_name String                                       // Firstname of the user
+  last_name  String?                                      // Lastname of the user
+  email      String   @unique                             // User email (must be unique)
+  password   String                                       // Hashed password for security
+  token      String?        
+  role       Role     @default(USER)                              // Current JWT token (optional for token-based auth)
+  createdAt  DateTime @default(now())                     // Timestamp for account creation
+  updatedAt  DateTime @updatedAt                          // Automatically updated on record modification
+  bio         String?
+  avatarUrl   String?
+  posts       Post[]    @relation("userPosts")                                  // Relation: User can author multiple posts
+  comments    Comment[] @relation("userComments")                               // Relation: User can write multiple comments
+  likes       Like[]    @relation("userLikes")                            // Relation: User can like multiple posts
+ 
+}
+
+model Post {
+  id          String       @id @default(uuid())
+  title       String
+  content     String
+  coverImage  String?
+  author      User         @relation( "userPosts", fields: [authorId], references: [id],onDelete: Cascade)
+  authorId    String                                     // Foreign key referencing the User table
+  comments    Comment[]                                  // Relation: Post can have multiple comments
+  likes       Like[]                                     // Relation: Post can have multiple likes
+  categories    Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String                       
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Comment {
+  id          String       @id @default(uuid())
+  content     String
+  post        Post         @relation( fields: [postId], references: [id],onDelete: Cascade)
+  postId      String                                         // Foreign key referencing the Post table
+  author      User         @relation("userComments", fields: [authorId], references: [id] ,onDelete:Cascade )
+  authorId    String                                        // Foreign key referencing the User table
+  createdAt   DateTime     @default(now())
+}
+
+model Like {
+  id          String       @id @default(uuid())
+  post        Post         @relation(fields: [postId], references: [id],onDelete:Cascade)
+  postId      String                                    // Foreign key referencing the Post table
+  user        User         @relation( "userLikes", fields: [userId], references: [id],onDelete:Cascade)
+  userId      String                                   // Foreign key referencing the User table
+  createdAt   DateTime     @default(now())
+
+  @@unique([postId, userId])
+}
+
+model Category {
+  id          String       @id @default(uuid())
+  name        String       
+  posts       Post[]                                  
+  }
+
+
+model FileAsset {
+  id       String @id @unique
+  fileName String
+}
+
+
+
