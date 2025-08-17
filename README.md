@@ -3,13 +3,6 @@
 This is a full-stack project with separate **frontend** and **backend** folders.
 featuring role-based access control for **admin** and **user** roles.
 
-## Folder Structure
-
-```bash
-
-. ├── frontend/ # Next.js frontend ├── backend/ # Fastify backend └── .git/ # Git initialized
-```
-
 ## Techstack
 
 - **Frontend**: Next.js, Shadcn/ui,
