@@ -5,7 +5,7 @@ featuring role-based access control for **admin** and **user** roles.
 
 ## Folder Structure
 
-```
+```bash
 
 . ├── frontend/ # Next.js frontend ├── backend/ # Fastify backend └── .git/ # Git initialized
 ```
