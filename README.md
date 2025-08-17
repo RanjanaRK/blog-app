@@ -5,7 +5,10 @@ featuring role-based access control for **admin** and **user** roles.
 
 ## Folder Structure
 
+```
+
 . ├── frontend/ # Next.js frontend ├── backend/ # Fastify backend └── .git/ # Git initialized
+```
 
 ## Techstack
 
