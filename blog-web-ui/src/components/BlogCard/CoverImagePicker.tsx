@@ -11,12 +11,6 @@ type CoverImagePickerProps = {
 const CoverImagePicker = ({ onFileSelected }: CoverImagePickerProps) => {
   const [selectedImage, setSelectedImage] = useState(false);
 
-  // Configure useFilePicker to accept image files (only single selection).
-  //   const [openFileSelector, { filesContent, loading, errors }] = useFilePicker({
-  //     accept: "image/*",
-  //     multiple: false,
-  //   });
-
   const { openFilePicker, filesContent, plainFiles, clear, errors, loading } =
     useFilePicker({
       multiple: false,

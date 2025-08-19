@@ -77,10 +77,5 @@ model Category {
   }
 
 
-model FileAsset {
-  id       String @id @unique
-  fileName String
-}
-
 
 

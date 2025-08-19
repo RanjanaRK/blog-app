@@ -13,7 +13,7 @@ const BlogCard = ({ postData }: BlogCardTypes) => {
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <Image
         className="w-full h-48 object-cover"
-        src={`http://127.0.0.1:9000${postData.coverImage}`}
+        src={`${process.env.NEXT_PUBLIC_API_URL}${postData.coverImage}`}
         width={100}
         height={100}
         alt={postData.title}
@@ -23,9 +23,10 @@ const BlogCard = ({ postData }: BlogCardTypes) => {
         <h2 className="text-xl font-bold mb-2 text-gray-800">
           {postData.title}
         </h2>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-5">
-          {postData.content}
-        </p>
+        <div
+          className="text-gray-600 text-sm mb-4 line-clamp-5 prose dark:prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: postData.content }}
+        />
 
         <div className="flex justify-between items-center">
           <div className="text-sm text-gray-500">

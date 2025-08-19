@@ -18,7 +18,7 @@ const AdminPost = ({ postData }: AdminPostPropsType) => {
           <DeleteBlogButton blogId={postData.id} />
           <Image
             className="w-full h-48 object-cover"
-            src={"/coverimg.jpg"}
+            src={`${process.env.NEXT_PUBLIC_API_URL}${postData.coverImage}`}
             width={100}
             height={100}
             alt={postData.title}
@@ -26,9 +26,10 @@ const AdminPost = ({ postData }: AdminPostPropsType) => {
 
           <div className="p-4">
             <h2 className="text-xl font-bold mb-2">{postData.title}</h2>
-            <p className=" text-sm mb-4 h-14 overflow-hidden">
-              {postData.content}
-            </p>
+            <p
+              className=" text-sm mb-4 h-14 overflow-hidden"
+              dangerouslySetInnerHTML={{ __html: postData.content }}
+            />
             <div className="flex justify-between items-center">
               <div className="text-sm text-gray-500">
                 <span>{postData.createdAt}</span>

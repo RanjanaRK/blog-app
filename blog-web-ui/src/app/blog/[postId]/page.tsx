@@ -37,7 +37,10 @@ const page = async ({ params }: { params: Promise<{ postId: string }> }) => {
             {new Date(data?.createdAt).toLocaleDateString()}
           </div>
 
-          <div className="prose max-w-none">{data?.content}</div>
+          <div
+            className="prose max-w-none"
+            dangerouslySetInnerHTML={{ __html: data?.content }}
+          />
         </article>
 
         <CommentSection postId={postId} />
