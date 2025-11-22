@@ -48,35 +48,6 @@ const LoginForm = () => {
 
   const { isSubmitting, isValid } = rhform.formState;
 
-  // const loginFormFunc = async (lfData: LoginFormType) => {
-  //   const { success, message, data } = await login(lfData);
-
-  //     const userRole = data?.user.role;
-
-  //     if (!success) {
-  //       toast.error(message);
-  //       return;
-  //     }
-
-  //     toast.success(message);
-  //     setAuth({
-  //       // id: data?.user.id,
-  //       // email: data?.user.email,
-  //       role: data?.user.role,
-  //     });
-
-  //     if (userRole === "ADMIN") {
-  //       push("/admin/profile");
-  //     } else {
-  //       push("/");
-  //     }
-  //   } catch (error: any) {
-  //     toast.error(error.message || "Login failed");
-  //     console.error(error);
-  //   }
-
-  // };
-
   const loginFormFunc = async (lfData: LoginFormType) => {
     try {
       const { success, message, data } = await login(lfData);
@@ -85,7 +56,7 @@ const LoginForm = () => {
         toast.error(message);
         return;
       }
-      // No need to check for data.user existence since our response always has it.
+
       const userRole = data?.user.role;
 
       if (!success) {
