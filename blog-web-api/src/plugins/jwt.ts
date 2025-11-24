@@ -22,89 +22,15 @@ export default fp<FastifyJWTOptions>(async (fastify) => {
     },
   });
 
-  // fastify.decorate(
-  //   "authenticate",
-  //   async (request: FastifyRequest, reply: FastifyReply) => {
-  //     const { authCookie } = request.cookies;
-
-  //     try {
-  //       if (authCookie === undefined) {
-  //         await request.jwtVerify();
-  //       } else {
-  //         const decoded = fastify.jwt.verify(authCookie);
-  //         request.user = decoded as { id: string; role: string };
-  //       }
-  //     } catch (error) {
-  //       reply.unauthorized("Unauthorized");
-  //     }
-  //   }
-  // );
-
-  // fastify.decorate(
-  //   "authenticate",
-  //   async (request: FastifyRequest, reply: FastifyReply) => {
-  //     const { authCookie } = request.cookies;
-
-  //     try {
-  //       if (!authCookie) {
-  //         // This will look for the token in the Authorization header.
-  //         await request.jwtVerify();
-  //       } else {
-  //         // Verify token from the cookie and attach decoded payload to request.user.
-  //         const decoded = await fastify.jwt.verify(authCookie);
-  //         request.user = decoded as { id: string; role: string };
-  //       }
-  //     } catch (error) {
-  //       reply.unauthorized("Unauthorized");
-  //     }
-  //   }
-  // );
-
-  // fastify.decorate(
-  //   "requireAdmin",
-  //   async (request: FastifyRequest, reply: FastifyReply) => {
-  //     // First, run the authentication.
-  //     await fastify.authenticate(request, reply);
-
-  //     // Check if user role is ADMIN.
-  //     if (!request.user || request.user.role !== "ADMIN") {
-  //       return reply.status(403).send({ error: "Access denied. Admins only." });
-  //     }
-  //   }
-  // );
-
   fastify.decorate(
     "authenticate",
     async (request: FastifyRequest, reply: FastifyReply) => {
-      //   try {
-      //     // Check both header and cookie, if needed.
-      //     const tokenFromHeader = request.headers.authorization?.split(" ")[1];
-      //     const tokenFromCookie = request.cookies.authCookie;
-      //     const token = tokenFromHeader || tokenFromCookie;
-
-      //     fastify.log.info("Token received: " + token);
-
-      //     if (!token) {
-      //       throw new Error("No token provided");
-      //     }
-
-      //     await request.jwtVerify(); // Ensure jwtVerify is using the same secret and options as during signing
-      //   } catch (err) {
-      //     fastify.log.error(err);
-      //     reply.code(401).send({ message: "Unauthorized" });
-      //   }
-      // }
-
       const { authCookie } = request.cookies;
-
-      // fastify.log.info("Request headers:", request.headers);
-      // fastify.log.info("Request cookies:", request.cookies);
 
       try {
         if (authCookie === undefined) {
           await request.jwtVerify();
         } else {
-          // fastify.jwt.verify(authCookie);
           const decoded = fastify.jwt.verify(authCookie);
           request.user = decoded as { id: string; role: string };
         }
