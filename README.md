@@ -22,3 +22,5 @@ featuring role-based access control for **admin** and **user** roles.
 - Clean architecture with modular folders and environment setup
 
 ---
+
+![My Screenshot](./images/screenshot.png)
