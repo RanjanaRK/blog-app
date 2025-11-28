@@ -3,7 +3,7 @@ import { jwtVerify } from "jose";
 import env from "./lib/env";
 
 export const middleware = async (request: NextRequest) => {
-  const cookiesToken = request.cookies.get("directus_session_token")?.value;
+  const cookiesToken = request.cookies.get("authCookie")?.value;
 
   const secret = new TextEncoder().encode(env.JWT_SECRET);
 
@@ -22,7 +22,7 @@ export const middleware = async (request: NextRequest) => {
       new URL("/auth/login", request.url)
     );
 
-    customResponse.cookies.delete("directus_session_token");
+    customResponse.cookies.delete("authCookie");
 
     return customResponse;
   }
