@@ -35,6 +35,7 @@
     "@tiptap/starter-kit": "^2.14.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "jose": "^6.1.2",
     "jotai": "^2.12.5",
     "ky": "^1.8.1",
     "lucide-react": "^0.511.0",
