@@ -23,4 +23,4 @@ featuring role-based access control for **admin** and **user** roles.
 
 ---
 
-![My Screenshot](./images/screenshot.png)
+![Screenshot](./images/screenshot.png)
